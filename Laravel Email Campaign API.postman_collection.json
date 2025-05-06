@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "63f437bf-248a-490d-97b1-08add8fda155",
+		"name": "Laravel Email Campaign API",
+		"description": "Complete API collection for the Email Campaign Laravel Package",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27143816"
+	},
+	"item": [
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "List Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/api/email-campaign/customers"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/email-campaign/customers?status=Paid&expires_within_days=30",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"email-campaign",
+								"customers"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Paid"
+								},
+								{
+									"key": "expires_within_days",
+									"value": "30"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Campaigns",
+			"item": [
+				{
+					"name": "Create Campaign",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Summer Sale\",\n    \"subject\": \"Special Discounts\",\n    \"body\": \"Hello {{name}}, check out our summer deals!\"\n}"
+						},
+						"url": "{{base_url}}/api/email-campaign/campaigns"
+					},
+					"response": []
+				},
+				{
+					"name": "List Campaigns",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/api/email-campaign/campaigns"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Campaign Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/api/email-campaign/campaigns/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Attach Recipients",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customer_ids\": [1, 2, 3]\n}"
+						},
+						"url": "{{base_url}}/api/email-campaign/campaigns/1/attach-recipients"
+					},
+					"response": []
+				},
+				{
+					"name": "List Campaign Recipients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/api/email-campaign/campaigns/1/recipients"
+					},
+					"response": []
+				},
+				{
+					"name": "Send Campaign",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "{{base_url}}/api/email-campaign/campaigns/1/send"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"exec": [
+					""
+				],
+				"type": "text/javascript"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				],
+				"type": "text/javascript"
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000"
+		}
+	]
+}
